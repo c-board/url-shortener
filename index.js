@@ -2,24 +2,43 @@ import dotenv from "dotenv";
 import pg from "pg";
 import { nanoid } from "nanoid";
 import express from "express";
+import cors from "cors";
 
-const { Pool } = pg;
 dotenv.config();
-
 const app = express();
+const { Pool } = pg;
+
 const pool = new Pool({
   host: process.env.HOST,
-  port: process.env.PO,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
+  port: process.env.PORT,
+  user: process.env.RAILWAY_USER,
+  password: process.env.RAILWAY_PASSWORD,
+  database: process.env.RAILWAY_DATABASE,
   max: 20,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  idleTimeoutMillis: 30000, // 60 seconds
+  connectionTimeoutMillis: 5000, // 5 seconds
   ssl: {
     rejectUnauthorized: false // Required for Railway's hosted database
   }
 });
+console.log("pool:", pool);
+
+// Debugging middleware
+app.use((req, res, next) => {
+  console.log(`Request: ${req.method} ${req.url}`);
+  next();
+});
+
+// Enable CORS
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"]
+  })
+);
+
+app.options("*", cors()); // Handle preflight
 
 // Middleware
 app.use(express.json());
@@ -40,11 +59,13 @@ app.post("/shorten", async (req, res) => {
     const values = [shortId, longUrl];
 
     const result = await pool.query(query, values);
-    res
-      .status(201)
-      .json({ shortUrl: `${req.headers.host}/${result.rows[0].short_id}` });
+    res.status(201).json({
+      shortUrl: `${req.protocol}://${req.get("host")}/${
+        result.rows[0].short_id
+      }`
+    });
   } catch (error) {
-    console.error(error);
+    console.error("Error in /shorten:", error.message, error.stack);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -62,15 +83,13 @@ app.get("/:shortId", async (req, res) => {
       return res.status(404).json({ error: "URL not found" });
     }
 
-    const longUrl = result.rows[0].long_url;
-    res.redirect(longUrl);
+    res.redirect(result.rows[0].long_url);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
