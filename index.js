@@ -1,11 +1,21 @@
-require("dotenv").config();
-const express = require("express");
-const { Pool } = require("pg");
-const { nanoid } = require("nanoid");
+import dotenv from "dotenv";
+import pg from "pg";
+import { nanoid } from "nanoid";
+import express from "express";
+
+const { Pool } = pg;
+dotenv.config();
 
 const app = express();
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  host: process.env.HOST,
+  port: process.env.PO,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
   ssl: {
     rejectUnauthorized: false // Required for Railway's hosted database
   }
