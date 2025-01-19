@@ -36,14 +36,6 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <h1>URL Shortener</h1>
       <div className="card">
         <input
@@ -51,6 +43,15 @@ function App() {
           placeholder="Enter long URL"
           value={longUrl}
           onChange={(e) => setLongUrl(e.target.value)}
+          style={{
+            padding: "0.6em 1.2em",
+            borderRadius: "8px",
+            fontSize: "1em",
+            fontWeight: "500",
+            color: "#000",
+            border: "1px solid black",
+            marginRight: "10px",
+          }}
         />
         <button onClick={handleShortenUrl}>Shorten URL</button>
       </div>
