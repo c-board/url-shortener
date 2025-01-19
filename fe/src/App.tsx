@@ -1,16 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Bars } from "react-loading-icons";
 import "./App.css";
 
 function App() {
   const [longUrl, setLongUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
   const handleShortenUrl = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/shorten`,
         {
@@ -31,6 +31,8 @@ function App() {
         setError("An unexpected error occurred");
       }
       setShortUrl("");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -43,17 +45,19 @@ function App() {
           placeholder="Enter long URL"
           value={longUrl}
           onChange={(e) => setLongUrl(e.target.value)}
-          style={{
-            padding: "0.6em 1.2em",
-            borderRadius: "8px",
-            fontSize: "1em",
-            fontWeight: "500",
-            color: "#000",
-            border: "1px solid black",
-            marginRight: "10px",
-          }}
+          className="url-input"
         />
-        <button onClick={handleShortenUrl}>Shorten URL</button>
+        <button
+          onClick={handleShortenUrl}
+          disabled={isLoading}
+          className="shorten-button"
+        >
+          {isLoading ? (
+            <Bars style={{ width: "1em", height: "1em" }} />
+          ) : (
+            "Shorten URL"
+          )}
+        </button>
       </div>
       {shortUrl && (
         <p>
