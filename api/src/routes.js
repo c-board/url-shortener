@@ -1,7 +1,6 @@
 import { Router } from "express";
-import { shortenUrl, redirectToUrl } from './controllers/urlController.js';
+import { shortenUrl, redirectToUrl } from "./controllers/urlController.js";
 
-// const router: Router = Router();
 const router = Router();
 
 // Generate a short URL
