@@ -14,18 +14,22 @@ function App() {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/shorten`,
         {
-          longUrl
+          longUrl,
         },
         {
           headers: {
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
       setShortUrl(response.data.shortUrl);
       setError("");
-    } catch (err: any) {
-      setError(err.response?.data?.error || "An error occurred");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.error || "An error occurred");
+      } else {
+        setError("An unexpected error occurred");
+      }
       setShortUrl("");
     }
   };
