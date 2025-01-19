@@ -7,7 +7,7 @@ dotenv.config();
 
 export const pool = new Pool({
   host: process.env.HOST,
-  port: process.env.PORT,
+  port: Number(process.env.PORT),
   user: process.env.RAILWAY_USER,
   password: process.env.RAILWAY_PASSWORD,
   database: process.env.RAILWAY_DATABASE,
@@ -15,7 +15,7 @@ export const pool = new Pool({
   idleTimeoutMillis: 30000, // 60 seconds
   connectionTimeoutMillis: 5000, // 5 seconds
   ssl: false,
-  sslmode: "disable",
+  // sslmode: "disable",
 });
 
 // Add error handler

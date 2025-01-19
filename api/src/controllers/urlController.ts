@@ -1,14 +1,12 @@
-// import { RequestHandler } from "express";
+import { RequestHandler } from "express";
 import { nanoid } from "nanoid";
 import { pool } from "../db.js";
 
-pool.on("error", (err) => {
+pool.on("error", (err: any) => {
   console.error("Unexpected error on idle client", err);
 });
 
-
-// export const shortenUrl: RequestHandler = async (req, res) => {
-export const shortenUrl = async (req, res) => {
+export const shortenUrl: RequestHandler = async (req, res) => {
   const { longUrl } = req.body;
 
   if (!longUrl) {
@@ -28,14 +26,17 @@ export const shortenUrl = async (req, res) => {
         result.rows[0].short_id
       }`,
     });
-  } catch (error) {
-    console.error("Error in /shorten:", error.message, error.stack);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error in /shorten:", error.message, error.stack);
+    } else {
+      console.error("Error in /shorten:", error);
+    }
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-// export const redirectToUrl: RequestHandler = async (req, res) => {
-export const redirectToUrl = async (req, res) => {
+export const redirectToUrl: RequestHandler = async (req, res) => {
   const { shortId } = req.params;
 
   try {
