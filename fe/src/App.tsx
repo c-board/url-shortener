@@ -3,6 +3,8 @@ import axios from "axios";
 import { Bars } from "react-loading-icons";
 import "./App.css";
 
+import LoginPage from "./app/login/page";
+
 function App() {
   const [longUrl, setLongUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
@@ -38,7 +40,7 @@ function App() {
 
   return (
     <>
-      <h1>URL Shortener</h1>
+      <LoginPage />
       <div className="card">
         <input
           type="text"
