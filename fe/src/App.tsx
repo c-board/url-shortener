@@ -1,8 +1,7 @@
-import LoginPage from "./app/login/page";
-import "./App.css";
+import ShortenPage from "./app/shorten/page";
 
 function App() {
-  return <LoginPage />;
+  return <ShortenPage />;
 }
 
 export default App;

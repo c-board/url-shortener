@@ -6,9 +6,8 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
-export function LoginForm({
+export function ShortenForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -56,17 +55,9 @@ export function LoginForm({
                 </p>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="email">Short URL</Label>
-                {/* <Input
-                  id="email"
-                  type="email"
-                  placeholder="example.com"
-                  required
-                /> */}
-
                 <Input
                   type="text"
-                  placeholder="Enter long URL"
+                  placeholder="example.com"
                   value={longUrl}
                   onChange={(e) => setLongUrl(e.target.value)}
                   className="url-input"
