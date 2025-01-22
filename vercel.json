@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/dist/**/*.js", "use": "@vercel/node" },
+    { 
+      "src": "fe/package.json", 
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    { "src": "/shorten", "dest": "api/dist/index.js" },
+    { "src": "/[shortId]", "dest": "api/dist/index.js" },
+    { "src": "/(.*)", "dest": "fe/dist/$1" }
+  ]
+}
+
