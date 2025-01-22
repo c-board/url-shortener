@@ -1,13 +1,19 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/dist/**/*.js", "use": "@vercel/node" },
+    { 
+      "src": "api/dist/**/*.js", 
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "cd api && pnpm install && pnpm run build"
+      }
+    },
     { 
       "src": "fe/package.json", 
       "use": "@vercel/static-build",
       "config": { 
         "distDir": "fe/dist",
-        "buildCommand": "cd fe && npm install && npm run build"
+        "buildCommand": "cd fe && pnpm install && pnpm run build"
       }
     }
   ],
