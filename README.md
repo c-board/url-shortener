@@ -32,16 +32,29 @@ A modern URL shortening service built with React, TypeScript, and Express. Featu
 ## Project Structure
 
 📦 url-shortener
+
 ├── fe/                   # Frontend application
+
 │   ├── src/
+
 │   │   ├── components/   # React components
+
 │   │   ├── lib/          # Utility functions
+
 │   │   └── app/          # Page components
+
 │   └── package.json
+
 │
+
 └── api/                  # Backend application
-    ├── src/
-    │   ├── controllers/  # Request handlers
-    │   ├── routes/       # API routes
-    │   └── db.ts         # Database configuration
-    └── package.json
+
+   ├── src/
+
+   │   ├── controllers/  # Request handlers
+
+   │   ├── routes/       # API routes
+
+   │   └── db.ts         # Database configuration
+    
+   └── package.json
