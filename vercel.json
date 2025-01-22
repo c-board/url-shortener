@@ -5,7 +5,10 @@
     { 
       "src": "fe/package.json", 
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "config": { 
+        "distDir": "fe/dist",
+        "buildCommand": "cd fe && npm install && npm run build"
+      }
     }
   ],
   "routes": [
