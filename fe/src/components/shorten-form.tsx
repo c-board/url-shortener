@@ -111,24 +111,37 @@ export function ShortenForm({
                   </div>
                 </div>
               )}
-              {error && <p className="text-center text-red-500">{error}</p>}
+              {error && (
+                <div className="block rounded-lg bg-destructive/50 p-4 text-center">
+                  <p className="text-sm text-white">{error}</p>
+                </div>
+              )}
             </div>
           </div>
         </CardContent>
       </Card>
       {shortUrl && (
-        <p className="block md:hidden">
-          Short URL:{" "}
-          <a
-            href={`http://${shortUrl}`}
-            target="_blank"
-            className="text-primary hover:text-primary/90 underline"
-          >
-            {shortUrl}
-          </a>
-        </p>
+        <div className="block space-y-2 rounded-lg bg-secondary/10 text-center md:hidden">
+          <p className="text-sm text-muted-foreground">Short URL generated:</p>
+
+          <div className="flex w-full gap-2">
+            <Input
+              type="email"
+              placeholder="Email"
+              value={shortUrl}
+              className="flex-1"
+            />
+            <Button onClick={handleCopy}>
+              {isCopied ? <Check /> : <Copy />}
+            </Button>
+          </div>
+        </div>
       )}
-      {error && <p className="block text-destructive md:hidden">{error}</p>}
+      {error && (
+        <div className="block rounded-lg bg-destructive/10 p-4 text-center md:hidden">
+          <p className="text-sm text-destructive">{error}</p>
+        </div>
+      )}
     </div>
   );
 }
