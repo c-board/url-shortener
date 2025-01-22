@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Check, Copy } from "lucide-react";
 
 export function ShortenForm({
   className,
@@ -14,7 +15,17 @@ export function ShortenForm({
   const [longUrl, setLongUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
   const [error, setError] = useState("");
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(shortUrl);
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
+
   const handleShortenUrl = async () => {
     try {
       setIsLoading(true);
@@ -84,18 +95,40 @@ export function ShortenForm({
               alt="Image"
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
             />
+            <div className="relative z-10 flex h-full w-full items-center justify-center">
+              {shortUrl && (
+                <div className="flex flex-col items-center text-center">
+                  <div className="flex flex-col items-center text-center mb-4">
+                    <p className="text-lg font-bold text-white">
+                      Your short URL
+                    </p>
+                  </div>
+                  <div className="flex  items-center space-x-2 text-white bg-black/50">
+                    <Input type="email" placeholder="Email" value={shortUrl} />
+                    <Button onClick={handleCopy}>
+                      {isCopied ? <Check /> : <Copy />}
+                    </Button>
+                  </div>
+                </div>
+              )}
+              {error && <p className="text-center text-red-500">{error}</p>}
+            </div>
           </div>
         </CardContent>
       </Card>
       {shortUrl && (
-        <p>
+        <p className="block md:hidden">
           Short URL:{" "}
-          <a href={`http://${shortUrl}`} target="_blank">
+          <a
+            href={`http://${shortUrl}`}
+            target="_blank"
+            className="text-primary hover:text-primary/90 underline"
+          >
             {shortUrl}
           </a>
         </p>
       )}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="block text-destructive md:hidden">{error}</p>}
     </div>
   );
 }
