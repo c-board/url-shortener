@@ -1,10 +1,19 @@
 import { RequestHandler } from "express";
 import { pool } from "../db";
-import { nanoid } from "nanoid";
 
 pool.on("error", (err: any) => {
   console.error("Unexpected error on idle client", err);
 });
+
+let nanoidModule: any = null;
+
+// Initialize nanoid module
+const getNanoid = async () => {
+  if (!nanoidModule) {
+    nanoidModule = await import('nanoid');
+  }
+  return nanoidModule.nanoid;
+};
 
 export const shortenUrl: RequestHandler = async (req, res) => {
   const { longUrl } = req.body;
@@ -15,7 +24,9 @@ export const shortenUrl: RequestHandler = async (req, res) => {
   }
 
   try {
+    const nanoid = await getNanoid();
     const shortId = nanoid(7);
+    
     const query =
       "INSERT INTO urls (short_id, long_url) VALUES ($1, $2) RETURNING short_id";
     const values = [shortId, longUrl];
