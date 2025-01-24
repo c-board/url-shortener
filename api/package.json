@@ -22,7 +22,8 @@
     "express": "^4.21.2",
     "nanoid": "^5.0.9",
     "pg": "^8.13.1",
-    "tsx": "^4.19.2"
+    "tsx": "^4.19.2",
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
