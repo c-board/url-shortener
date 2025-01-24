@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { pool } from "../db";
+import { nanoid } from "nanoid";
 
 pool.on("error", (err: any) => {
   console.error("Unexpected error on idle client", err);
@@ -14,7 +15,6 @@ export const shortenUrl: RequestHandler = async (req, res) => {
   }
 
   try {
-    const { nanoid } = await import("nanoid");
     const shortId = nanoid(7);
     const query =
       "INSERT INTO urls (short_id, long_url) VALUES ($1, $2) RETURNING short_id";
