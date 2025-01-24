@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import { nanoid } from "nanoid";
 import { pool } from "../db";
 
 pool.on("error", (err: any) => {
@@ -15,6 +14,7 @@ export const shortenUrl: RequestHandler = async (req, res) => {
   }
 
   try {
+    const { nanoid } = await import("nanoid");
     const shortId = nanoid(7);
     const query =
       "INSERT INTO urls (short_id, long_url) VALUES ($1, $2) RETURNING short_id";

@@ -1,24 +1,29 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "lib": ["ES2020"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "target": "ES2022",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "outDir": "dist",
-    "rootDir": "src",
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "allowImportingTsExtensions": false,
     "noEmit": false,
-    "declaration": false,
-    "moduleDetection": "force"
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es6",
+    "typeRoots": ["./src/types", "./node_modules/@types"]
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"],
-  "ts-node": {
+  "include": ["src", "scripts"],
+  "ts-node-dev": {
     "esm": true,
-    "experimentalSpecifierResolution": "node"
+    "experimentalSpecifierResolution": "node",
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }
