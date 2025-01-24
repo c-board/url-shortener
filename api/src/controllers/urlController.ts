@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { nanoid } from "nanoid";
-import { pool } from "../db.js";
+import { pool } from "../db";
 
 pool.on("error", (err: any) => {
   console.error("Unexpected error on idle client", err);
