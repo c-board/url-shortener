@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { shortenUrl, redirectToUrl } from "./controllers/urlController";
+import { shortenLimiter, redirectLimiter } from "./middleware/rateLimiter";
 
 const router = Router();
 
@@ -9,9 +10,9 @@ router.get("/", (req, res) => {
 });
 
 // Generate a short URL
-router.post("/shorten", shortenUrl);
+router.post("/shorten", shortenLimiter, shortenUrl);
 
 // Redirect to the long URL
-router.get("/:shortId", redirectToUrl);
+router.get("/:shortId", redirectLimiter, redirectToUrl);
 
 export default router;

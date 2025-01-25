@@ -44,7 +44,11 @@ export function ShortenForm({
       setError("");
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        setError(err.response?.data?.error || "An error occurred");
+        if (err.response?.status === 429) {
+          setError("Too many requests. Please try again later.");
+        } else {
+          setError(err.response?.data?.error || "An error occurred");
+        }
       } else {
         setError("An unexpected error occurred");
       }
