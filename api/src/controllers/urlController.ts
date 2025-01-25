@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { pool } from "../db";
 import { v4 as uuidv4 } from "uuid";
+import { isURL } from "validator";
 
 pool.on("error", (err: any) => {
   console.error("Unexpected error on idle client", err);
@@ -11,6 +12,11 @@ export const shortenUrl: RequestHandler = async (req, res) => {
 
   if (!longUrl) {
     res.status(400).json({ error: "Long URL is required" });
+    return;
+  }
+
+  if (!isURL(longUrl, { require_protocol: true })) {
+    res.status(400).json({ error: "Invalid URL format" });
     return;
   }
 

@@ -15,7 +15,6 @@ export const pool = new Pool({
   idleTimeoutMillis: 30000, // 60 seconds
   connectionTimeoutMillis: 5000, // 5 seconds
   ssl: false,
-  // sslmode: "disable",
 });
 
 // Add error handler
