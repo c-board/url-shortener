@@ -28,11 +28,15 @@ export function ShortenForm({
 
   const handleShortenUrl = async () => {
     try {
+      const sanitizedUrl = encodeURI(longUrl.trim());
+      console.log("longUrl:", longUrl)
+      console.log("sanitizedUrl:", sanitizedUrl)
+
       setIsLoading(true);
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/shorten`,
         {
-          longUrl,
+          longUrl: sanitizedUrl,
         },
         {
           headers: {
