@@ -12,8 +12,20 @@ export default function ShortenPage() {
         <div data-mlre-div="this is the div text">div with data attribute</div>
         <div>div without data attribute</div>
 
-        <button data-mlre-button="this is the button text">button with data attribute</button>
+        <button data-mlre-button="this is the button text">
+          button with data attribute
+        </button>
         <button>button without data attribute</button>
+
+        <img
+          src="https://w.wallhaven.cc/full/6l/wallhaven-6l5kp7.jpg"
+          alt="image with data attribute"
+          data-mlre-image="this is the image text"
+        />
+        <img
+          src="https://w.wallhaven.cc/full/6l/wallhaven-6l5kp7.jpg"
+          alt="image without data attribute"
+        />
 
         <ShortenForm />
       </div>
