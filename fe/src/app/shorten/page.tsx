@@ -4,8 +4,17 @@ export default function ShortenPage() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10">
       <div className="w-full max-w-sm md:max-w-3xl">
-        <a href="/data-attribute" data-mlre="link">with data attribute</a>
+        <a href="/data-attribute" data-mlre-link="this is the link text">
+          anchor with data attribute
+        </a>
         <a href="/no-data-attribute">without data attribute</a>
+
+        <div data-mlre-div="this is the div text">div with data attribute</div>
+        <div>div without data attribute</div>
+
+        <button data-mlre-button="this is the button text">button with data attribute</button>
+        <button>button without data attribute</button>
+
         <ShortenForm />
       </div>
     </div>
