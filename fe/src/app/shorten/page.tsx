@@ -4,17 +4,21 @@ export default function ShortenPage() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10">
       <div className="w-full max-w-sm md:max-w-3xl">
-        <a href="/data-attribute" data-mlre-link="this is the link text">
+        {/* Links */}
+        <a href="/same-page">
           anchor with data attribute
         </a>
-        <a href="/no-data-attribute">without data attribute</a>
+
+        {/* Links with target _blank */}
         <a
-          data-mlre-link="this is the link text with target _blank"
           target="_blank"
+          href="https://www.google.com"
         >
           anchor with target _blank and data attribute
         </a>
 
+    
+        {/* Divs */}
         <div
           data-mlre-annotate-title="this is the div title"
           data-mlre-annotate-text="this is the div text"
@@ -23,11 +27,13 @@ export default function ShortenPage() {
         </div>
         <div>div without data attribute</div>
 
+        {/* Buttons */}
         <button data-mlre-button="this is the button text">
           button with data attribute
         </button>
         <button>button without data attribute</button>
 
+        {/* Images */}
         <img
           src="https://w.wallhaven.cc/full/6l/wallhaven-6l5kp7.jpg"
           alt="image with data attribute"
