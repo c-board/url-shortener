@@ -5,7 +5,7 @@ export default function ShortenPage() {
     <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10">
       <div className="w-full max-w-sm md:max-w-3xl">
         {/* Links */}
-        <a href="/same-page">anchor with data attribute</a>
+        <a href="/same-window">anchor with data attribute</a>
 
         {/* Links with target _blank */}
         <a target="_blank" href="https://www.google.com">
