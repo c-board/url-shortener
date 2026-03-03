@@ -16,7 +16,6 @@ export default function ShortenPage() {
         <img
           src="https://w.wallhaven.cc/full/6l/wallhaven-6l5kp7.jpg"
           alt="image with data attribute"
-          data-mlre-image="this is the image text"
         />
         <img
           src="https://w.wallhaven.cc/full/6l/wallhaven-6l5kp7.jpg"
@@ -26,7 +25,7 @@ export default function ShortenPage() {
         {/* Divs */}
         <div
           data-mlre-annotate-title="this is the div title"
-          data-mlre-annotate-text="this is the div text"
+          data-mlre-annotate="this is the div text"
         >
           div with data attribute
         </div>
@@ -35,7 +34,7 @@ export default function ShortenPage() {
         {/* Buttons */}
         <button
           data-mlre-annotate-title="this is the button title"
-          data-mlre-annotate-text="this is the button text"
+          data-mlre-annotate="this is the button text"
         >
           button with data attribute
         </button>
