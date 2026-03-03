@@ -9,6 +9,10 @@ export default function ShortenPage() {
         </a>
         <a href="/no-data-attribute">without data attribute</a>
 
+        <a data-mlre-link="this is the link text with target _blank" target="_blank">
+          anchor with target _blank and data attribute
+        </a>
+
         <div data-mlre-div="this is the div text">div with data attribute</div>
         <div>div without data attribute</div>
 
